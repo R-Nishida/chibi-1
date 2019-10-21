@@ -1,4 +1,7 @@
-class Val(object):
+class Expr(object):
+    pass
+
+class Val(Expr):
     __slots__ = ['value']
     def __init__(self, value = 0):
         self.value = value
@@ -8,11 +11,11 @@ class Val(object):
         return self.value
 
 def toExpr(x):
-    if isinstance(x, int):
+    if not isinstance(x, Expr):
         x = Val(x)
     return x
 
-class Add(object):
+class Add(Expr):
     __slots__ = ['left', 'right']
     def __init__(self, left, right):
         self.left = toExpr(left)
@@ -23,6 +26,10 @@ class Add(object):
 x = Val(3)
 print(x)
 assert x.eval() == 3
+
+assert isinstance(x, Expr)
+assert isinstance(x, Val)
+assert not isinstance(x, int)
 
 # e = Add(1,3)   #evalを使って値にするので、そもそもintを入れるとNG
 e = Add(Val(1), Val(3))
@@ -36,6 +43,5 @@ assert e.eval() == 8
 e = Add(1,2)    # Add(1,2,3)はNG
 print(e.eval())
 
-e = Add(Add(1,2),5)    # Add(1,2,3)はNG
+e = Add(Add(1,2),5)
 print(e.eval())
-
