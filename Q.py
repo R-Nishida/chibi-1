@@ -7,7 +7,9 @@ class Q(object):
         self.b = b // k
 
     def __repr__(self):
-        return str(self.a)+"/"+str(self.b)
+        if self.b == 1:
+            return str(self.a)
+        return f'{self.a}/{self.b}'   # type(str)
 
     def add(self, q):
         a = self.a
@@ -49,7 +51,7 @@ class Q(object):
         return Q(a*d, b*c)
 
 q=Q(1,2)
-q1=Q(3,4)
+q1=Q(2,4)
 
 print(q.add(q1))
 
