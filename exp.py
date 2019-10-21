@@ -6,16 +6,27 @@ class Val(Expr):
     def __init__(self, value = 0):
         self.value = value
     def __repr__(self):
-        return f'Val({self.value})'
+        return f'{self.value}'
     def eval(self):
         return self.value
+
+class Binary(Expr):
+    __slots__ = ['left', 'right']
+    def __init__(self, left, right):
+        self.left = left
+        self.right = right
+    def __repr__(self):
+        classname = self.__class__.__name__
+        return f'{classname}({self.left}, {self.right})'
+    def eval(self):
+        return toExpr(self.left).eval() + toExpr(self.right).eval()
 
 def toExpr(x):
     if not isinstance(x, Expr):
         x = Val(x)
     return x
 
-class Add(Expr):
+class Add(Binary):
     __slots__ = ['left', 'right']
     def __init__(self, left, right):
         self.left = toExpr(left)
@@ -45,3 +56,7 @@ print(e.eval())
 
 e = Add(Add(1,2),5)
 print(e.eval())
+
+b=Binary(Add(1,5),Val(3))
+print(b)
+print(b.eval())
