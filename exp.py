@@ -34,6 +34,32 @@ class Add(Binary):
     def eval(self):
         return self.left.eval() + self.right.eval()
 
+class Sub(Binary):
+    __slots__ = ['left', 'right']
+    def __init__(self, left, right):
+        self.left = toExpr(left)
+        self.right = toExpr(right)
+    def eval(self):
+        return self.left.eval() - self.right.eval()
+
+class Mul(Binary):
+    __slots__ = ['left', 'right']
+    def __init__(self, left, right):
+        self.left = toExpr(left)
+        self.right = toExpr(right)
+    def eval(self):
+        return self.left.eval() * self.right.eval()
+
+class Div(Binary):
+    __slots__ = ['left', 'right']
+    def __init__(self, left, right):
+        self.left = toExpr(left)
+        self.right = toExpr(right)
+    def eval(self):
+        return self.left.eval() // self.right.eval()
+
+
+
 x = Val(3)
 print(x)
 assert x.eval() == 3
