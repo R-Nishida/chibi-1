@@ -1,0 +1,4 @@
+
+example Zip 123-4432
+Zip = { Code '-' Code #PostalCode}
+Code = { [0-9]+ #Code}
