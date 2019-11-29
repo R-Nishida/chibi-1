@@ -1,6 +1,6 @@
-example Expr 1+2
-Expr = {
-    Value '+' Value
-}
-Value = DIGIT
-DIGIT={[0-9]+ #int}
+example Expr (1+2)*3
+
+Expr = {{Value '+' Value #Add} / {Value '*' Value #Mul} #Expr}
+
+Value = { DIGIT+ #Int } / '(' Expr ')' 
+DIGIT = [0-9]
